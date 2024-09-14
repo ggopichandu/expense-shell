@@ -75,3 +75,9 @@ VALIDATE $? "Enabling backend"
 
 dnf install mysql -y &>>$LOGFILE
 VALIDATE $? "Installing MqSQL Client"
+
+mysql -h mysql.ggopichand.online -uroot -p${mysql_root_password} < /app/schema/backend.sql &>>$LOGFILE
+VALIDATE $? "Schema loading"
+
+systemctl restart backend &>>$LOGFILE
+VALIDATE $? "Restarting backend"
